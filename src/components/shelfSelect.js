@@ -9,6 +9,15 @@ class ShelfSelect extends Component {
     console.log(this.state.book);
     this.setState({ value: event.target.value });
   }
+  componentDidUpdate() {
+    if (this.props.book && this.state.value !== this.props.book.shelf) {
+      //book arrived from api call
+      this.setState({
+        value: this.props.book.shelf,
+        book: this.props.book,
+      });
+    }
+  }
 
   componentDidMount() {
     if (this.props.book) {

@@ -6,13 +6,6 @@ import Shelf from "./components/shelf";
 
 class BooksApp extends React.Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
-    showSearchPage: false,
     books: [],
     currentlyReading: [],
     wantToRead: [],
@@ -38,6 +31,7 @@ class BooksApp extends React.Component {
     console.log("in handle change current book state");
     book.shelf = event.target.value; //edit book in state
     const index = this.state.books.findIndex((b) => b.id === book.id);
+    console.log(book, this.state.books, index);
     let newBooks = [...this.state.books];
     newBooks[index].shelf = event.target.value;
     this.setState({ books: newBooks });
@@ -71,9 +65,7 @@ class BooksApp extends React.Component {
             </div>
           </div>
           <div className="open-search">
-            <button onClick={() => this.setState({ showSearchPage: true })}>
-              Add a book
-            </button>
+            <button onClick={() => ({})}>Add a book</button>
           </div>
         </div>
         )
