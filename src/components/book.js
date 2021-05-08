@@ -1,16 +1,36 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import ShelfSelect from "./shelfSelect";
 
 class Book extends Component {
   state = {
-    data: {},
+    authorsNames: "",
+    authors: [],
+    imageLink: "",
   };
 
   componentDidMount() {
-    this.setState({ data: this.props.data });
+    let authorsNames = this.generateAuthorNames();
+    let imageLink = this.generateImageLink();
+    this.setState({ ...this.props.data, authorsNames, imageLink });
   }
 
+  generateAuthorNames() {
+    let authorsNames = "";
+    if (this.props.data)
+      this.props.data.authors.forEach((element) => {
+        authorsNames += element + " ";
+      });
+    return authorsNames;
+  }
+
+  generateImageLink() {
+    return `url("${this.props.data.imageLinks.smallThumbnail}")`;
+  }
+  //handleChangeCurrentBookState;
   render() {
+    console.log(this.props);
+    console.log(this.state);
     return (
       <div className="book">
         <div className="book-top">
@@ -19,10 +39,16 @@ class Book extends Component {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url("${this.state.data.previewLink}")`,
+              backgroundImage: this.state.imageLink,
             }}
           ></div>
-          <div className="book-shelf-changer">
+          <ShelfSelect
+            handleChangeCurrentBookState={
+              this.props.handleChangeCurrentBookState
+            }
+            book={this.state}
+          />
+          {/* <div className="book-shelf-changer">
             <select>
               <option value="move" disabled>
                 Move to...
@@ -32,10 +58,10 @@ class Book extends Component {
               <option value="read">Read</option>
               <option value="none">None</option>
             </select>
-          </div>
+          </div> */}
         </div>
-        <div className="book-title">To Kill a Mockingbird</div>
-        <div className="book-authors">Harper Lee</div>
+        <div className="book-title">{this.state.title}</div>
+        <div className="book-authors">{this.state.authorsNames}</div>
       </div>
     );
   }
