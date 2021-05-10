@@ -14,6 +14,8 @@ class SearchPage extends Component {
     let books = await search(e.target.value);
     // console.log("These are the books", books);
     if (!books || books.error) books = [];
+    this.findBooksOnShelvesAndChangeTheirShelfInSearch();
+
     this.setState({ books });
   };
   handleChangeCurrentBookState = async (book, event) => {

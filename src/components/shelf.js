@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { getAll } from "../BooksAPI";
 import Book from "./book";
 
 class Shelf extends Component {
@@ -22,7 +21,6 @@ class Shelf extends Component {
     }
   }
   render() {
-
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{this.state.title}</h2>

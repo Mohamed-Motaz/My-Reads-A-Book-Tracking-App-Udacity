@@ -1,7 +1,7 @@
-import React, { Children } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 // import * as BooksAPI from './BooksAPI'
-import { get, getAll, update } from "../BooksAPI";
+import { getAll, update } from "../BooksAPI";
 import Shelf from "./shelf";
 
 class BooksApp extends React.Component {
