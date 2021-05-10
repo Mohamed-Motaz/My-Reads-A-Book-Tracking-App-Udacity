@@ -10,6 +10,13 @@ class Book extends Component {
   };
 
   componentDidMount() {
+    console.log("this is it", this.props.data);
+    console.log(Object.keys(this.props.data));
+    if (this.props.data.shelf)
+      console.log(
+        "this is awesomeeeeee\n\n\n\n\n\n\n\n\n\n\n",
+        this.props.data.shelf
+      );
     let authorsNames = this.generateAuthorNames();
     let imageLink = this.generateImageLink();
     this.setState({ ...this.props.data, authorsNames, imageLink });
@@ -17,20 +24,29 @@ class Book extends Component {
 
   generateAuthorNames() {
     let authorsNames = "";
-    if (this.props.data)
-      this.props.data.authors.forEach((element) => {
-        authorsNames += element + " ";
-      });
+    if (this.props.data) {
+      try {
+        this.props.data.authors.forEach((element) => {
+          authorsNames += element + " ";
+        });
+      } catch {
+        authorsNames = "";
+      }
+    }
+
     return authorsNames;
   }
 
   generateImageLink() {
-    return `url("${this.props.data.imageLinks.smallThumbnail}")`;
+    try {
+      return `url("${this.props.data.imageLinks.smallThumbnail}")`;
+    } catch {
+      return "url()";
+    }
   }
   //handleChangeCurrentBookState;
   render() {
-    console.log(this.props);
-    console.log(this.state);
+    console.log("this is the received book", this.props, this.state);
     return (
       <div className="book">
         <div className="book-top">

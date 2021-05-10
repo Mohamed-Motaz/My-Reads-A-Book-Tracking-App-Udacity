@@ -31,13 +31,13 @@ class BooksApp extends React.Component {
     console.log("in handle change current book state");
     book.shelf = event.target.value; //edit book in state
     const index = this.state.books.findIndex((b) => b.id === book.id);
-    console.log(book, this.state.books, index);
     let newBooks = [...this.state.books];
+    // console.log(index, newBooks, book);
+
     newBooks[index].shelf = event.target.value;
     this.setState({ books: newBooks });
-    console.log("\n\n\n\n\n\n\n\n\n");
-    console.log(event.target.value);
     await update(book, event.target.value); //edit book in db
+    window.location.reload();
   };
 
   render() {

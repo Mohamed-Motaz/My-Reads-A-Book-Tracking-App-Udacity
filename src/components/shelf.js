@@ -10,10 +10,6 @@ class Shelf extends Component {
   };
 
   async componentDidMount() {
-    console.log("in component did mount");
-    console.log(this.props);
-    console.log(this.props.books);
-
     this.setState({
       title: this.props.title,
       books: this.props.books,
@@ -26,8 +22,7 @@ class Shelf extends Component {
     }
   }
   render() {
-    console.log(this.props);
-    console.log(this.state.books);
+
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{this.state.title}</h2>
