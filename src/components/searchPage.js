@@ -27,7 +27,9 @@ class SearchPage extends Component {
     this.setState({ books: newBooks });
     console.log("About to await", book, event.target.value);
     await update(book, event.target.value); //edit book in db
-    console.log("DONE CALLINGGGGG UPDATEEEEEEEEEEEEEEE\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+    console.log(
+      "DONE CALLINGGGGG UPDATEEEEEEEEEEEEEEE\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+    );
   };
 
   findBooksOnShelvesAndChangeTheirShelfInSearch = async () => {
@@ -39,16 +41,16 @@ class SearchPage extends Component {
           console.log("innnnnn");
           currentBooks[j].shelf = books[i].shelf;
         }
-        if (!currentBooks[j].shelf) currentBooks[j].shelf = "none";
       }
     }
-    // console.log(books, currentBooks);
+    console.log("these are the updated ones");
+    console.log(books, currentBooks);
     this.setState({ books: currentBooks, editedBooks: true });
   };
   componentDidUpdate() {
     console.log("in componentdidmount");
-    // if (!this.state.editedBooks && this.state.books.length > 0)
-    //this.findBooksOnShelvesAndChangeTheirShelfInSearch();
+    if (!this.state.editedBooks && this.state.books.length > 0)
+      this.findBooksOnShelvesAndChangeTheirShelfInSearch();
   }
 
   render() {

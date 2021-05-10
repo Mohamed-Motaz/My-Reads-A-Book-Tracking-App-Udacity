@@ -3,24 +3,7 @@ import PropTypes from "prop-types";
 import ShelfSelect from "./shelfSelect";
 
 class Book extends Component {
-  state = {
-    authorsNames: "",
-    authors: [],
-    imageLink: "",
-  };
-
-  componentDidMount() {
-    console.log("this is it", this.props.data);
-    console.log(Object.keys(this.props.data));
-    if (this.props.data.shelf)
-      console.log(
-        "this is awesomeeeeee\n\n\n\n\n\n\n\n\n\n\n",
-        this.props.data.shelf
-      );
-    let authorsNames = this.generateAuthorNames();
-    let imageLink = this.generateImageLink();
-    this.setState({ ...this.props.data, authorsNames, imageLink });
-  }
+  state = {};
 
   generateAuthorNames() {
     let authorsNames = "";
@@ -46,7 +29,7 @@ class Book extends Component {
   }
   //handleChangeCurrentBookState;
   render() {
-    console.log("this is the received book", this.props, this.state);
+    console.log("this is the received book", this.props);
     return (
       <div className="book">
         <div className="book-top">
@@ -55,14 +38,14 @@ class Book extends Component {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: this.state.imageLink,
+              backgroundImage: this.generateImageLink(),
             }}
           ></div>
           <ShelfSelect
             handleChangeCurrentBookState={
               this.props.handleChangeCurrentBookState
             }
-            book={this.state}
+            book={this.props}
           />
           {/* <div className="book-shelf-changer">
             <select>
@@ -76,8 +59,8 @@ class Book extends Component {
             </select>
           </div> */}
         </div>
-        <div className="book-title">{this.state.title}</div>
-        <div className="book-authors">{this.state.authorsNames}</div>
+        <div className="book-title">{this.props.data.title}</div>
+        <div className="book-authors">{this.generateAuthorNames()}</div>
       </div>
     );
   }
